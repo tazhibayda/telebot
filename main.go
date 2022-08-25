@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/joho/godotenv"
 	"github.com/yanzay/tbot/v2"
 	"log"
+	"os"
 )
 
 type application struct {
@@ -22,14 +22,14 @@ func main() {
 }
 
 func launch() {
-	var envs map[string]string
-	envs, err := godotenv.Read(".env")
+	//var envs map[string]string
+	//envs, err := godotenv.Read(".env")
+	//
+	//if err != nil {
+	//	log.Fatal("Error loading .env file")
+	//}
 
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
-	bot = tbot.New(envs["TELEGRAM_TOKEN"])
+	bot = tbot.New(os.Getenv("token"))
 	app.client = bot.Client()
 	handlers()
 	log.Fatal(bot.Start())
